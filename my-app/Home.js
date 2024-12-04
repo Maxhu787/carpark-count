@@ -26,21 +26,19 @@ export default function Home() {
           style={{
             display: "flex",
             flexDirection: "row",
-            backgroundColor: "lightblue",
-            width: "100%",
+            // backgroundColor: "lightblue",
+            widthƒ: "100%",
             padding: 20,
-            gap: 20,
+            gap: 12,
+            alignItems: "center",
           }}
         >
-          <View style={{ flex: 0.1 }}>
-            <Text
-              variant="headlineSmall"
-              style={{ width: 20, backgroundColor: "#fff" }}
-            >
-              每
-            </Text>
-          </View>
-          <View style={{ flex: 1 }}>
+          <View
+            style={{
+              flex: 1,
+              alignItems: "center",
+            }}
+          >
             <IconButton
               style={styles.button}
               icon="menu-up-outline"
@@ -48,7 +46,11 @@ export default function Home() {
               size={25}
               onPress={() => console.log("Pressed")}
             />
-            <TextInput style={styles.input} />
+            <TextInput
+              value={"20 $"}
+              keyboardType="numeric"
+              style={styles.input}
+            />
             <IconButton
               style={styles.button}
               icon="menu-down-outline"
@@ -57,15 +59,16 @@ export default function Home() {
               onPress={() => console.log("Pressed")}
             />
           </View>
-          <View style={{ flex: 0.1 }}>
-            <Text
-              variant="headlineSmall"
-              style={{ width: 20, backgroundColor: "#fff" }}
-            >
-              分鐘
-            </Text>
-          </View>
-          <View style={{ flex: 1 }}>
+          <Text
+            variant="displayMedium"
+            style={{
+              width: 50,
+              textAlign: "center",
+            }}
+          >
+            /
+          </Text>
+          <View style={{ flex: 1, alignItems: "center" }}>
             <IconButton
               style={styles.button}
               icon="menu-up-outline"
@@ -73,8 +76,11 @@ export default function Home() {
               size={25}
               onPress={() => console.log("Pressed")}
             />
-
-            <TextInput style={styles.input} />
+            <TextInput
+              value={"30"}
+              keyboardType="numeric"
+              style={styles.input}
+            />
             <IconButton
               style={styles.button}
               icon="menu-down-outline"
@@ -83,17 +89,17 @@ export default function Home() {
               onPress={() => console.log("Pressed")}
             />
           </View>
-          <View style={{ flex: 0.1 }}>
-            <Text
-              variant="headlineSmall"
-              style={{ width: 20, backgroundColor: "#fff" }}
-            >
-              元
-            </Text>
-          </View>
+          <Text
+            variant="displaySmall"
+            style={{
+              width: 50,
+              textAlign: "center",
+            }}
+          >
+            分鐘
+          </Text>
         </View>
-
-        <StatusBar style="auto" />
+        <StatusBar backgroundColor={"#258AEA"} style="auto" />
       </View>
     </TouchableWithoutFeedback>
   );
@@ -109,18 +115,17 @@ const styles = StyleSheet.create({
     // backgroundColor: "red",
   },
   button: {
-    backgroundColor: "#000",
+    backgroundColor: "rgb(45, 45, 45)",
     borderRadius: 12,
     width: "100%",
     // margin: 0,
   },
   input: {
-    backgroundColor: "#fff",
+    backgroundColor: "#eee",
     borderRadius: 12,
     width: "100%",
-    // width: 25,
-    // height: 25,
     padding: 20,
-    // margin: 10,
+    fontSize: 30,
+    marginVertical: 10,
   },
 });
