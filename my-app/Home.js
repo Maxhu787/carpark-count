@@ -4,10 +4,11 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
+  ScrollView,
 } from "react-native";
 import { Modal, Portal, IconButton, Text, DataTable } from "react-native-paper";
 import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Dropdown } from "react-native-element-dropdown";
 
 export default function Home() {
@@ -20,6 +21,49 @@ export default function Home() {
   const [calc, setCalc] = useState(null);
   const [calcPrice, setCalcPrice] = useState("");
   const [rules, setRules] = useState([]);
+  const [currentTime, setCurrentTime] = useState(
+    new Date().toLocaleTimeString()
+  );
+  const [hoursLater, setHoursLater] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date().toLocaleTimeString());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const calculateTotalPrice = () => {
+      let total = 0;
+      if (rules.length === 0) {
+        total = (hoursLater / rateHr) * rate;
+      } else {
+        let remainingHours = hoursLater;
+        rules.forEach((rule) => {
+          if (remainingHours <= 0) return;
+          const ruleHours = parseFloat(rule.ruleHr);
+          if (rule.type === "1" && remainingHours <= ruleHours) {
+            total += rule.calc === "3" ? 0 : parseFloat(rule.calcPrice);
+            remainingHours = 0;
+          } else if (rule.type === "1" && remainingHours > ruleHours) {
+            total += rule.calc === "3" ? 0 : parseFloat(rule.calcPrice);
+            remainingHours -= ruleHours;
+          } else if (rule.type === "2" && remainingHours > ruleHours) {
+            total += rule.calc === "3" ? 0 : parseFloat(rule.calcPrice);
+            remainingHours -= ruleHours;
+          }
+        });
+        if (remainingHours > 0) {
+          total += (remainingHours / rateHr) * rate;
+        }
+      }
+      console.log(total);
+      setTotalPrice(total);
+    };
+    // console.log(rules, rate, rateHr, hoursLater);
+    calculateTotalPrice();
+  }, [rules, rate, rateHr, hoursLater]);
 
   const addRule = () => {
     const newRule = { ruleHr, type, calc, calcPrice };
@@ -42,7 +86,7 @@ export default function Home() {
   ];
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <Portal>
           <Modal
             visible={visible}
@@ -154,7 +198,6 @@ export default function Home() {
             paddingVertical: 20,
             width: "100%",
             alignItems: "center",
-            // backgroundColor: "green",
           }}
         >
           <Text variant="displayMedium">停車費用計算</Text>
@@ -240,7 +283,7 @@ export default function Home() {
             variant="displaySmall"
             style={{
               width: 50,
-              textAlign: "center",
+              textAlign: "left",
             }}
           >
             hr
@@ -248,35 +291,71 @@ export default function Home() {
         </View>
         <View
           style={{
-            paddingVertical: 20,
             width: "100%",
-            // alignItems: "center",
             paddingHorizontal: 20,
-            // backgroundColor: "green",
+            alignItems: "center",
           }}
         >
-          <Text variant="headlineSmall" style={{ marginBottom: 10 }}>
+          <Text
+            variant="headlineSmall"
+            style={{
+              marginBottom: 10,
+              marginTop: 18,
+              textAlign: "left",
+              width: "100%",
+            }}
+          >
+            停車時間
+          </Text>
+          <Text
+            variant="titleMedium"
+            style={{ textAlign: "center", marginVertical: 0 }}
+          >
+            Current Time: {currentTime}
+          </Text>
+          <Text
+            variant="titleMedium"
+            style={{ textAlign: "center", marginVertical: 0 }}
+          >
+            離開時間 (小時後)
+          </Text>
+          <TextInput
+            value={hoursLater}
+            keyboardType="numeric"
+            style={{
+              width: "25%",
+              height: 50,
+              padding: 10,
+              fontSize: 20,
+              marginTop: 12,
+              borderStyle: "solid",
+              borderWidth: 2,
+              borderColor: "black",
+              borderRadius: 12,
+            }}
+            onChangeText={(text) => setHoursLater(text)}
+          />
+        </View>
+        <View
+          style={{
+            paddingVertical: 20,
+            width: "100%",
+            alignItems: "center",
+            paddingHorizontal: 20,
+          }}
+        >
+          <Text
+            variant="headlineSmall"
+            style={{ marginBottom: 10, textAlign: "left", width: "100%" }}
+          >
             計算規則
           </Text>
           <IconButton
-            style={styles.button}
+            style={[styles.button, { alignSelf: "center" }]}
             icon="plus-circle-outline"
             iconColor={"#fff"}
             size={25}
             onPress={() => setVisible(true)}
-          />
-          <IconButton
-            style={styles.button}
-            icon="alert-circle-outline"
-            iconColor={"#fff"}
-            size={25}
-            onPress={() =>
-              alert(
-                `Rate: ${rate}, RateHr: ${rateHr}, RuleHr: ${ruleHr}, Type: ${type}, Calc: ${calc}, Rules: ${JSON.stringify(
-                  rules
-                )}`
-              )
-            }
           />
         </View>
         <DataTable>
@@ -299,8 +378,14 @@ export default function Home() {
             </DataTable.Row>
           ))}
         </DataTable>
+        <Text
+          variant="headlineSmall"
+          style={{ marginBottom: 10, textAlign: "left", width: "100%" }}
+        >
+          Total Price: {totalPrice}
+        </Text>
         <StatusBar backgroundColor={"#258AEA"} style="auto" />
-      </View>
+      </ScrollView>
     </TouchableWithoutFeedback>
   );
 }
