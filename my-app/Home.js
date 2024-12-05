@@ -36,32 +36,29 @@ export default function Home() {
   useEffect(() => {
     const calculateTotalPrice = () => {
       let total = 0;
-      if (rules.length === 0) {
-        total = (hoursLater / rateHr) * rate;
-      } else {
-        let remainingHours = hoursLater;
-        rules.forEach((rule) => {
-          if (remainingHours <= 0) return;
-          const ruleHours = parseFloat(rule.ruleHr);
-          if (rule.type === "1" && remainingHours <= ruleHours) {
-            total += rule.calc === "3" ? 0 : parseFloat(rule.calcPrice);
-            remainingHours = 0;
-          } else if (rule.type === "1" && remainingHours > ruleHours) {
-            total += rule.calc === "3" ? 0 : parseFloat(rule.calcPrice);
-            remainingHours -= ruleHours;
-          } else if (rule.type === "2" && remainingHours > ruleHours) {
-            total += rule.calc === "3" ? 0 : parseFloat(rule.calcPrice);
-            remainingHours -= ruleHours;
-          }
-        });
-        if (remainingHours > 0) {
-          total += (remainingHours / rateHr) * rate;
+      let remainingHours = hoursLater;
+      rules.sort((a, b) => parseFloat(a.ruleHr) - parseFloat(b.ruleHr)); // Sort rules by hours
+
+      rules.forEach((rule) => {
+        if (remainingHours <= 0) return;
+        const ruleHours = parseFloat(rule.ruleHr);
+        if (rule.type === "1" && remainingHours <= ruleHours) {
+          total += rule.calc === "3" ? 0 : parseFloat(rule.calcPrice);
+          remainingHours = 0;
+        } else if (rule.type === "1" && remainingHours > ruleHours) {
+          total += rule.calc === "3" ? 0 : parseFloat(rule.calcPrice);
+          remainingHours -= ruleHours;
+        } else if (rule.type === "2" && remainingHours > ruleHours) {
+          total += rule.calc === "3" ? 0 : parseFloat(rule.calcPrice);
+          remainingHours -= ruleHours;
         }
+      });
+
+      if (remainingHours > 0) {
+        total += (remainingHours / rateHr) * rate;
       }
-      // console.log(total);
       setTotalPrice(total);
     };
-    // console.log(rules, rate, rateHr, hoursLater);
     calculateTotalPrice();
   }, [rules, rate, rateHr, hoursLater]);
 
