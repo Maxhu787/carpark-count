@@ -36,8 +36,8 @@ export default function Home() {
   useEffect(() => {
     const calculateTotalPrice = () => {
       let total = 0;
-      let remainingHours = hoursLater;
-      rules.sort((a, b) => parseFloat(a.ruleHr) - parseFloat(b.ruleHr)); // Sort rules by hours
+      let remainingHours = parseFloat(hoursLater);
+      rules.sort((a, b) => parseFloat(b.ruleHr) - parseFloat(a.ruleHr));
 
       rules.forEach((rule) => {
         if (remainingHours <= 0) return;
@@ -296,7 +296,7 @@ export default function Home() {
           style={{
             width: "100%",
             paddingHorizontal: 20,
-            alignItems: "center",
+            // alignItems: "center",
           }}
         >
           <Text
@@ -312,13 +312,7 @@ export default function Home() {
           </Text>
           <Text
             variant="titleMedium"
-            style={{ textAlign: "center", marginVertical: 0 }}
-          >
-            Current Time: {currentTime}
-          </Text>
-          <Text
-            variant="titleMedium"
-            style={{ textAlign: "center", marginVertical: 0 }}
+            style={{ textAlign: "left", marginVertical: 0 }}
           >
             離開時間 (小時後)
           </Text>
@@ -326,18 +320,24 @@ export default function Home() {
             value={hoursLater}
             keyboardType="numeric"
             style={{
-              width: "25%",
+              width: "100%",
               height: 50,
               padding: 10,
               fontSize: 20,
-              marginTop: 12,
+              marginTop: 10,
               borderStyle: "solid",
-              borderWidth: 2,
+              borderWidth: 3,
               borderColor: "black",
               borderRadius: 12,
             }}
             onChangeText={(text) => setHoursLater(text)}
           />
+          <Text
+            variant="titleMedium"
+            style={{ textAlign: "center", marginVertical: 10 }}
+          >
+            Current Time: {currentTime}
+          </Text>
         </View>
         <View
           style={{
@@ -361,7 +361,7 @@ export default function Home() {
             onPress={() => setVisible(true)}
           />
         </View>
-        <DataTable>
+        <DataTable style={{ paddingBottom: 50 }}>
           <DataTable.Header>
             <DataTable.Title>小時</DataTable.Title>
             <DataTable.Title>類型</DataTable.Title>
