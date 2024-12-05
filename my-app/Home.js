@@ -58,7 +58,7 @@ export default function Home() {
           total += (remainingHours / rateHr) * rate;
         }
       }
-      console.log(total);
+      // console.log(total);
       setTotalPrice(total);
     };
     // console.log(rules, rate, rateHr, hoursLater);
@@ -202,6 +202,12 @@ export default function Home() {
         >
           <Text variant="displayMedium">停車費用計算</Text>
         </View>
+        <Text
+          variant="headlineMedium"
+          style={{ paddingHorizontal: 20, textAlign: "left", width: "100%" }}
+        >
+          總費用 {totalPrice}$
+        </Text>
         <Text
           variant="headlineSmall"
           style={{ paddingHorizontal: 20, paddingVertical: 8 }}
@@ -378,12 +384,6 @@ export default function Home() {
             </DataTable.Row>
           ))}
         </DataTable>
-        <Text
-          variant="headlineSmall"
-          style={{ marginBottom: 10, textAlign: "left", width: "100%" }}
-        >
-          Total Price: {totalPrice}
-        </Text>
         <StatusBar backgroundColor={"#258AEA"} style="auto" />
       </ScrollView>
     </TouchableWithoutFeedback>
