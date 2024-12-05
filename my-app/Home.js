@@ -5,7 +5,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import { Modal, Portal, IconButton, Text } from "react-native-paper";
+import { Modal, Portal, IconButton, Text, DataTable } from "react-native-paper";
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import { Dropdown } from "react-native-element-dropdown";
@@ -18,6 +18,19 @@ export default function Home() {
   const [ruleHr, setRuleHr] = useState("1");
   const [type, setType] = useState(null);
   const [calc, setCalc] = useState(null);
+  const [calcPrice, setCalcPrice] = useState("");
+  const [rules, setRules] = useState([]);
+
+  const addRule = () => {
+    const newRule = { ruleHr, type, calc, calcPrice };
+    setRules([...rules, newRule]);
+    setVisible(false);
+
+    setRuleHr("1");
+    setType(null);
+    setCalc(null);
+    setCalcPrice("");
+  };
 
   const data1 = [
     { label: "以內", value: "1" },
@@ -44,7 +57,11 @@ export default function Home() {
               新增規則
             </Text>
             <View
-              style={{ flexDirection: "row", justifyContent: "space-between" }}
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
             >
               <TextInput
                 value={ruleHr}
@@ -61,6 +78,7 @@ export default function Home() {
                 }}
                 onChangeText={(text) => setRuleHr(text)}
               />
+              <Text variant="titleLarge">小時</Text>
               <Dropdown
                 style={{
                   width: "25%",
@@ -104,9 +122,9 @@ export default function Home() {
                 }}
               />
             </View>
-            {calc === 4 && (
+            {calc === "4" && (
               <TextInput
-                value={"30" + " $"}
+                value={calcPrice}
                 keyboardType="numeric"
                 style={{
                   width: "25%",
@@ -119,6 +137,7 @@ export default function Home() {
                   borderColor: "black",
                   borderRadius: 12,
                 }}
+                onChangeText={(text) => setCalcPrice(text)}
               />
             )}
             <IconButton
@@ -126,7 +145,7 @@ export default function Home() {
               icon="check"
               iconColor={"#fff"}
               size={25}
-              onPress={() => setVisible(false)}
+              onPress={addRule}
             />
           </Modal>
         </Portal>
@@ -253,11 +272,33 @@ export default function Home() {
             size={25}
             onPress={() =>
               alert(
-                `Rate: ${rate}, RateHr: ${rateHr}, RuleHr: ${ruleHr}, Type: ${type}, Calc: ${calc}`
+                `Rate: ${rate}, RateHr: ${rateHr}, RuleHr: ${ruleHr}, Type: ${type}, Calc: ${calc}, Rules: ${JSON.stringify(
+                  rules
+                )}`
               )
             }
           />
         </View>
+        <DataTable>
+          <DataTable.Header>
+            <DataTable.Title>小時</DataTable.Title>
+            <DataTable.Title>類型</DataTable.Title>
+            <DataTable.Title>計算</DataTable.Title>
+            <DataTable.Title>價格</DataTable.Title>
+          </DataTable.Header>
+          {rules.map((rule, index) => (
+            <DataTable.Row key={index}>
+              <DataTable.Cell>{rule.ruleHr}</DataTable.Cell>
+              <DataTable.Cell>
+                {rule.type === "1" ? "以內" : rule.type === "2" ? "之後" : ""}
+              </DataTable.Cell>
+              <DataTable.Cell>
+                {rule.calc === "3" ? "免費" : rule.calc === "4" ? "自訂" : ""}
+              </DataTable.Cell>
+              <DataTable.Cell>{rule.calcPrice}</DataTable.Cell>
+            </DataTable.Row>
+          ))}
+        </DataTable>
         <StatusBar backgroundColor={"#258AEA"} style="auto" />
       </View>
     </TouchableWithoutFeedback>
