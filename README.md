@@ -1,37 +1,45 @@
-# carpark-count
+<img width="1000px" src="./ParkPal.png"/>
 
-```
-收費
-88$/00 hr
-```
+# ParkPal
 
-```
-計算規則
-00 hr (以內/之後): 免費/88$/不計算
-不足一小時 (以分鐘計算) or (視為 1 小時) or (不計算)
-```
+ParkPal helps you calculate your parking fees.
 
-```
-停車時間 curr time (editable)
-離開世間 input or (max paying price)
-```
+<img height="400px" src="./demo-2.png" /><img height="400px" src="./demo-1.png" /><img height="400px"  src="./demo-3.png" />
 
-```
-其他
-總價×80%
+## Installation
+
+You can download the compiled version of this project for android here <a href="https://github.com/Maxhu787/Cnt-Dwn/blob/main/android-build.apk">download</a>
+<br/>or build it yourself below
+
+## Build Guide
+
+### Setup
+
+```bash
+git clone https://github.com/Maxhu787/carpark-count.git
 ```
 
-```
-Other features
-(Picture section take pic of spot)
-(Scan payment rules with camera and ai)
-(Keep track of parcking coordinate or car park to remember the rules)
-(Notify me at 00 hrs)
-(Scan feature behind paywall)
-ParkPal ParkPro
+```bash
+cd my-app
+npm run start
 ```
 
-https://pictogrammers.com/library/mdi/
-https://www.youtube.com/watch?v=QSNkU7v0MPc
-https://docs.expo.dev/build-reference/local-builds/
-https://github.com/Maxhu787/cnt-dwn
+#### android
+
+```bash
+eas build --local --profile production --platform android
+```
+
+#### ios
+
+```bash
+eas build --local --profile production --platform ios
+```
+
+#### web
+
+```bash
+npx expo export --platform web
+```
+
+<a href="https://maxhu787.github.io/">Hu Kaixiang</a> 2024 12/04 ~ 12/06<br/>
