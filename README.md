@@ -32,3 +32,6 @@ ParkPal ParkPro
 ```
 
 https://pictogrammers.com/library/mdi/
+https://www.youtube.com/watch?v=QSNkU7v0MPc
+https://docs.expo.dev/build-reference/local-builds/
+https://github.com/Maxhu787/cnt-dwn
