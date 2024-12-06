@@ -8,7 +8,7 @@ ParkPal helps you calculate your parking fees.
 
 ## Installation
 
-You can download the compiled version of this project for android here <a href="https://github.com/Maxhu787/Cnt-Dwn/blob/main/android-build.apk">download</a>
+You can download the compiled version of this project for android here <a href="https://github.com/Maxhu787/carpark-count/blob/main/android-build.apk">download</a>
 <br/>or build it yourself below
 
 ## Build Guide
