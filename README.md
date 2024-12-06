@@ -27,13 +27,13 @@ npm run start
 #### android
 
 ```bash
-eas build --local --profile production --platform android
+eas build --local --profile preview --platform android
 ```
 
 #### ios
 
 ```bash
-eas build --local --profile production --platform ios
+eas build --local --profile preview --platform ios
 ```
 
 #### web
