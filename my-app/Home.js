@@ -123,7 +123,9 @@ export default function Home() {
                 }}
                 onChangeText={(text) => setRuleHr(text)}
               />
-              <Text variant="titleLarge">小時</Text>
+              <Text variant="titleLarge" style={{ color: "#fff" }}>
+                小時
+              </Text>
               <Dropdown
                 style={{
                   width: "25%",

@@ -4,7 +4,7 @@
 
 ParkPal helps you calculate your parking fees.
 
-<img height="400px" src="./demo-2.png" /><img height="400px" src="./demo-1.png" /><img height="400px"  src="./demo-3.png" />
+<img height="400px" src="./demo-1.png" /><img height="400px" src="./demo-2.png" /><img height="400px"  src="./demo-3.png" />
 
 ## Installation
 
