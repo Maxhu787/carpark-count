@@ -393,7 +393,7 @@ const styles = StyleSheet.create({
     paddingVertical: 40,
     // alignItems: "center",
     // justifyContent: "center",
-    color: "#eeefff",
+    color: "#000",
     // backgroundColor: "red",
   },
   button: {
