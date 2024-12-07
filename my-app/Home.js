@@ -89,14 +89,14 @@ export default function Home() {
             visible={visible}
             onDismiss={() => setVisible(false)}
             contentContainerStyle={{
-              backgroundColor: "white",
+              backgroundColor: "rgb(34, 34, 34)",
               paddingVertical: 20,
               paddingHorizontal: 18,
             }}
           >
             <Text
               variant="headlineSmall"
-              style={{ marginBottom: 14, color: "black" }}
+              style={{ marginBottom: 14, color: "#fff" }}
             >
               新增規則
             </Text>
@@ -117,8 +117,9 @@ export default function Home() {
                   fontSize: 20,
                   borderStyle: "solid",
                   borderWidth: 2,
-                  borderColor: "black",
+                  borderColor: "#fff",
                   borderRadius: 12,
+                  color: "#fff",
                 }}
                 onChangeText={(text) => setRuleHr(text)}
               />
@@ -130,11 +131,11 @@ export default function Home() {
                   padding: 10,
                   borderStyle: "solid",
                   borderWidth: 2,
-                  borderColor: "black",
+                  borderColor: "#fff",
                   borderRadius: 12,
                 }}
-                placeholderStyle={{ fontSize: 20 }}
-                selectedTextStyle={{ fontSize: 20 }}
+                placeholderStyle={{ fontSize: 20, color: "#fff" }}
+                selectedTextStyle={{ fontSize: 20, color: "#fff" }}
                 data={data1}
                 labelField="label"
                 valueField="value"
@@ -151,11 +152,11 @@ export default function Home() {
                   padding: 10,
                   borderStyle: "solid",
                   borderWidth: 2,
-                  borderColor: "black",
+                  borderColor: "#fff",
                   borderRadius: 12,
                 }}
-                placeholderStyle={{ fontSize: 20 }}
-                selectedTextStyle={{ fontSize: 20 }}
+                placeholderStyle={{ fontSize: 20, color: "#fff" }}
+                selectedTextStyle={{ fontSize: 20, color: "#fff" }}
                 data={data2}
                 labelField="label"
                 valueField="value"
@@ -178,8 +179,9 @@ export default function Home() {
                   marginTop: 12,
                   borderStyle: "solid",
                   borderWidth: 2,
-                  borderColor: "black",
+                  borderColor: "#fff",
                   borderRadius: 12,
+                  color: "#fff",
                 }}
                 onChangeText={(text) => setCalcPrice(text)}
               />
@@ -200,7 +202,7 @@ export default function Home() {
             alignItems: "center",
           }}
         >
-          <Text variant="displayMedium" style={{ color: "black" }}>
+          <Text variant="displayMedium" style={{ color: "#258AEA" }}>
             停車費用計算
           </Text>
         </View>
@@ -210,14 +212,14 @@ export default function Home() {
             paddingHorizontal: 20,
             textAlign: "left",
             width: "100%",
-            color: "black",
+            color: "#fff",
           }}
         >
           總費用 {totalPrice}$
         </Text>
         <Text
           variant="headlineSmall"
-          style={{ paddingHorizontal: 20, paddingVertical: 8, color: "black" }}
+          style={{ paddingHorizontal: 20, paddingVertical: 8, color: "#fff" }}
         >
           基本費用
         </Text>
@@ -264,7 +266,7 @@ export default function Home() {
             style={{
               width: 50,
               textAlign: "center",
-              color: "black",
+              color: "#fff",
             }}
           >
             /
@@ -298,9 +300,10 @@ export default function Home() {
             style={{
               width: 50,
               textAlign: "left",
-              color: "black",
+              color: "#fff",
             }}
           >
+            {" "}
             hr
           </Text>
         </View>
@@ -318,14 +321,14 @@ export default function Home() {
               marginTop: 18,
               textAlign: "left",
               width: "100%",
-              color: "black",
+              color: "#fff",
             }}
           >
             停車時間
           </Text>
           <Text
             variant="titleMedium"
-            style={{ textAlign: "left", marginVertical: 0, color: "black" }}
+            style={{ textAlign: "left", marginVertical: 0, color: "#fff" }}
           >
             離開時間 (小時後)
           </Text>
@@ -340,14 +343,15 @@ export default function Home() {
               marginTop: 10,
               borderStyle: "solid",
               borderWidth: 3,
-              borderColor: "black",
+              borderColor: "#fff",
               borderRadius: 12,
+              color: "#fff",
             }}
             onChangeText={(text) => setHoursLater(text)}
           />
           <Text
             variant="titleMedium"
-            style={{ textAlign: "center", marginVertical: 10, color: "black" }}
+            style={{ textAlign: "center", marginVertical: 10, color: "#fff" }}
           >
             Current Time: {currentTime}
           </Text>
@@ -366,7 +370,7 @@ export default function Home() {
               marginBottom: 10,
               textAlign: "left",
               width: "100%",
-              color: "black",
+              color: "#fff",
             }}
           >
             計算規則
@@ -379,25 +383,35 @@ export default function Home() {
             onPress={() => setVisible(true)}
           />
         </View>
-        <DataTable style={{ paddingBottom: 50 }}>
+        <DataTable
+          style={{ paddingBottom: 50, backgroundColor: "rgb(34, 34, 34)" }}
+        >
           <DataTable.Header>
-            <DataTable.Title style={{ color: "black" }}>小時</DataTable.Title>
-            <DataTable.Title style={{ color: "black" }}>類型</DataTable.Title>
-            <DataTable.Title style={{ color: "black" }}>計算</DataTable.Title>
-            <DataTable.Title style={{ color: "black" }}>價格</DataTable.Title>
+            <DataTable.Title textStyle={{ color: "#fff" }}>
+              小時
+            </DataTable.Title>
+            <DataTable.Title textStyle={{ color: "#fff" }}>
+              類型
+            </DataTable.Title>
+            <DataTable.Title textStyle={{ color: "#fff" }}>
+              計算
+            </DataTable.Title>
+            <DataTable.Title textStyle={{ color: "#fff" }}>
+              價格
+            </DataTable.Title>
           </DataTable.Header>
           {rules.map((rule, index) => (
             <DataTable.Row key={index}>
-              <DataTable.Cell style={{ color: "black" }}>
+              <DataTable.Cell textStyle={{ color: "#fff" }}>
                 {rule.ruleHr}
               </DataTable.Cell>
-              <DataTable.Cell style={{ color: "black" }}>
+              <DataTable.Cell textStyle={{ color: "#fff" }}>
                 {rule.type === "1" ? "以內" : rule.type === "2" ? "之後" : ""}
               </DataTable.Cell>
-              <DataTable.Cell style={{ color: "black" }}>
+              <DataTable.Cell textStyle={{ color: "#fff" }}>
                 {rule.calc === "3" ? "免費" : rule.calc === "4" ? "自訂" : ""}
               </DataTable.Cell>
-              <DataTable.Cell style={{ color: "black" }}>
+              <DataTable.Cell textStyle={{ color: "#fff" }}>
                 {rule.calcPrice}
               </DataTable.Cell>
             </DataTable.Row>
@@ -416,16 +430,17 @@ const styles = StyleSheet.create({
     // alignItems: "center",
     // justifyContent: "center",
     color: "#000",
-    // backgroundColor: "red",
+    backgroundColor: "rgb(34, 34, 34)",
   },
   button: {
-    backgroundColor: "rgb(45, 45, 45)",
+    // backgroundColor: "rgb(45, 45, 45)",
+    backgroundColor: "#258AEA",
     borderRadius: 12,
     width: "100%",
     // margin: 0,
   },
   input: {
-    backgroundColor: "#eee",
+    backgroundColor: "#fff",
     borderRadius: 12,
     width: "100%",
     padding: 12,
