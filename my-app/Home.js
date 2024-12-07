@@ -94,7 +94,10 @@ export default function Home() {
               paddingHorizontal: 18,
             }}
           >
-            <Text variant="headlineSmall" style={{ marginBottom: 14 }}>
+            <Text
+              variant="headlineSmall"
+              style={{ marginBottom: 14, color: "black" }}
+            >
               新增規則
             </Text>
             <View
@@ -197,17 +200,24 @@ export default function Home() {
             alignItems: "center",
           }}
         >
-          <Text variant="displayMedium">停車費用計算</Text>
+          <Text variant="displayMedium" style={{ color: "black" }}>
+            停車費用計算
+          </Text>
         </View>
         <Text
           variant="headlineMedium"
-          style={{ paddingHorizontal: 20, textAlign: "left", width: "100%" }}
+          style={{
+            paddingHorizontal: 20,
+            textAlign: "left",
+            width: "100%",
+            color: "black",
+          }}
         >
           總費用 {totalPrice}$
         </Text>
         <Text
           variant="headlineSmall"
-          style={{ paddingHorizontal: 20, paddingVertical: 8 }}
+          style={{ paddingHorizontal: 20, paddingVertical: 8, color: "black" }}
         >
           基本費用
         </Text>
@@ -254,6 +264,7 @@ export default function Home() {
             style={{
               width: 50,
               textAlign: "center",
+              color: "black",
             }}
           >
             /
@@ -287,6 +298,7 @@ export default function Home() {
             style={{
               width: 50,
               textAlign: "left",
+              color: "black",
             }}
           >
             hr
@@ -306,13 +318,14 @@ export default function Home() {
               marginTop: 18,
               textAlign: "left",
               width: "100%",
+              color: "black",
             }}
           >
             停車時間
           </Text>
           <Text
             variant="titleMedium"
-            style={{ textAlign: "left", marginVertical: 0 }}
+            style={{ textAlign: "left", marginVertical: 0, color: "black" }}
           >
             離開時間 (小時後)
           </Text>
@@ -334,7 +347,7 @@ export default function Home() {
           />
           <Text
             variant="titleMedium"
-            style={{ textAlign: "center", marginVertical: 10 }}
+            style={{ textAlign: "center", marginVertical: 10, color: "black" }}
           >
             Current Time: {currentTime}
           </Text>
@@ -349,7 +362,12 @@ export default function Home() {
         >
           <Text
             variant="headlineSmall"
-            style={{ marginBottom: 10, textAlign: "left", width: "100%" }}
+            style={{
+              marginBottom: 10,
+              textAlign: "left",
+              width: "100%",
+              color: "black",
+            }}
           >
             計算規則
           </Text>
@@ -363,21 +381,25 @@ export default function Home() {
         </View>
         <DataTable style={{ paddingBottom: 50 }}>
           <DataTable.Header>
-            <DataTable.Title>小時</DataTable.Title>
-            <DataTable.Title>類型</DataTable.Title>
-            <DataTable.Title>計算</DataTable.Title>
-            <DataTable.Title>價格</DataTable.Title>
+            <DataTable.Title style={{ color: "black" }}>小時</DataTable.Title>
+            <DataTable.Title style={{ color: "black" }}>類型</DataTable.Title>
+            <DataTable.Title style={{ color: "black" }}>計算</DataTable.Title>
+            <DataTable.Title style={{ color: "black" }}>價格</DataTable.Title>
           </DataTable.Header>
           {rules.map((rule, index) => (
             <DataTable.Row key={index}>
-              <DataTable.Cell>{rule.ruleHr}</DataTable.Cell>
-              <DataTable.Cell>
+              <DataTable.Cell style={{ color: "black" }}>
+                {rule.ruleHr}
+              </DataTable.Cell>
+              <DataTable.Cell style={{ color: "black" }}>
                 {rule.type === "1" ? "以內" : rule.type === "2" ? "之後" : ""}
               </DataTable.Cell>
-              <DataTable.Cell>
+              <DataTable.Cell style={{ color: "black" }}>
                 {rule.calc === "3" ? "免費" : rule.calc === "4" ? "自訂" : ""}
               </DataTable.Cell>
-              <DataTable.Cell>{rule.calcPrice}</DataTable.Cell>
+              <DataTable.Cell style={{ color: "black" }}>
+                {rule.calcPrice}
+              </DataTable.Cell>
             </DataTable.Row>
           ))}
         </DataTable>
